@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mahadev Pass</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+            text-align: center;
+            font-family: sans-serif;
+            padding: 40px;
+        }
+
+        img {
+            width: 200px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: #111;
+            padding: 30px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <img src="https://i.imgur.com/3ZQ3Z4O.png">
+
+        <h2>🔱 MAHADEV PASS 🔱</h2>
+
+        <div id="persons"></div>
+
+    </div>
+
+    <script>
+
+        const params = new URLSearchParams(location.search);
+
+        const data = JSON.parse(decodeURIComponent(params.get("data")));
+
+        const box = document.getElementById("persons");
+
+        data.persons.forEach((p, i) => {
+
+            box.innerHTML += `
+<p>
+<b>${i + 1}</b> | ${p.name} | ${p.phone}
+</p>
+`;
+
+        });
+
+    </script>
+
+</body>
+
+</html>
