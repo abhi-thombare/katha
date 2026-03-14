@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="hi">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🔱 Mahadev Pass System</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     :root {
@@ -17,19 +14,11 @@
       --dark: #0a0505;
       --cream: #f5e6c8;
       --ash: #d4cfc8;
-      --vvip-from: #c9a227;
-      --vvip-to: #5a3a00;
-      --vip-from: #888;
-      --vip-to: #333;
-      --nonvip-from: #7b4f2e;
-      --nonvip-to: #3a1a00;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       background: #0a0505;
@@ -37,1024 +26,477 @@
       min-height: 100vh;
       overflow-x: hidden;
       background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(201, 162, 39, 0.07) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(255, 107, 0, 0.06) 0%, transparent 50%),
-        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201, 162, 39, 0.02) 60px, rgba(201, 162, 39, 0.02) 61px),
-        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(201, 162, 39, 0.02) 60px, rgba(201, 162, 39, 0.02) 61px);
+        radial-gradient(ellipse at 20% 50%, rgba(201,162,39,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(255,107,0,0.06) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,162,39,0.02) 60px, rgba(201,162,39,0.02) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(201,162,39,0.02) 60px, rgba(201,162,39,0.02) 61px);
     }
 
-    /* Floating particles */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
+    /* ── Particles ── */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
     .particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: var(--gold);
-      border-radius: 50%;
-      opacity: 0;
+      position: absolute; width: 3px; height: 3px;
+      background: var(--gold); border-radius: 50%; opacity: 0;
       animation: floatUp linear infinite;
     }
-
     @keyframes floatUp {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-
-      10% {
-        opacity: 0.6;
-      }
-
-      90% {
-        opacity: 0.3;
-      }
-
-      100% {
-        transform: translateY(-10vh) rotate(720deg);
-        opacity: 0;
-      }
+      0%   { transform: translateY(100vh) rotate(0deg);   opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
     }
 
+    /* ── Header ── */
     header {
-      position: relative;
-      z-index: 10;
+      position: relative; z-index: 10;
       text-align: center;
-      padding: 40px 20px 20px;
+      padding: clamp(28px, 6vw, 50px) 20px clamp(16px, 3vw, 24px);
     }
-
     .om-symbol {
-      font-size: 3rem;
+      font-size: clamp(2.2rem, 7vw, 3.5rem);
       color: var(--gold);
-      text-shadow: 0 0 30px rgba(201, 162, 39, 0.8);
+      text-shadow: 0 0 30px rgba(201,162,39,0.8);
       animation: pulse 2s ease-in-out infinite;
       display: block;
     }
-
     @keyframes pulse {
-
-      0%,
-      100% {
-        text-shadow: 0 0 20px rgba(201, 162, 39, 0.6);
-        transform: scale(1);
-      }
-
-      50% {
-        text-shadow: 0 0 50px rgba(201, 162, 39, 1), 0 0 80px rgba(255, 107, 0, 0.5);
-        transform: scale(1.05);
-      }
+      0%,100% { text-shadow: 0 0 20px rgba(201,162,39,0.6); transform: scale(1); }
+      50%      { text-shadow: 0 0 55px rgba(201,162,39,1), 0 0 80px rgba(255,107,0,0.5); transform: scale(1.06); }
     }
-
     header h1 {
       font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.4rem, 4vw, 2.8rem);
+      font-size: clamp(1.1rem, 4.5vw, 2.8rem);
       font-weight: 900;
       background: linear-gradient(135deg, #c9a227, #fff8e1, #c9a227, #ff6b00);
       background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       animation: shimmer 4s ease infinite;
-      letter-spacing: 3px;
+      letter-spacing: clamp(1px, 0.5vw, 4px);
       margin-top: 10px;
     }
-
     @keyframes shimmer {
-
-      0%,
-      100% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
     }
-
     header p {
-      color: var(--ash);
-      font-size: 0.85rem;
-      letter-spacing: 4px;
-      margin-top: 6px;
-      opacity: 0.7;
+      color: var(--ash); font-size: clamp(0.7rem, 2vw, 0.9rem);
+      letter-spacing: 4px; margin-top: 6px; opacity: 0.7;
     }
 
-    /* MAIN PASS SELECTION */
+    .ornament {
+      text-align: center; position: relative; z-index: 10;
+      color: rgba(201,162,39,0.4); font-size: 1.1rem;
+      letter-spacing: 10px; padding: 8px 0 4px;
+    }
+
+    /* ── Pass Cards Grid ── */
     .pass-container {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      gap: 20px;
+      position: relative; z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 320px));
+      gap: clamp(14px, 3vw, 24px);
       justify-content: center;
-      flex-wrap: wrap;
-      padding: 30px 20px;
+      padding: clamp(16px, 4vw, 30px) clamp(14px, 4vw, 24px) clamp(24px, 5vw, 40px);
       max-width: 1100px;
       margin: 0 auto;
     }
 
     .pass-card {
-      width: 300px;
       border-radius: 20px;
-      padding: 30px 24px;
+      padding: clamp(20px, 4vw, 30px) clamp(18px, 3vw, 24px);
       cursor: pointer;
       position: relative;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border: 1px solid transparent;
     }
-
     .pass-card::before {
       content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      padding: 2px;
+      position: absolute; inset: 0; border-radius: 20px; padding: 2px;
       background: linear-gradient(135deg, var(--border-from), var(--border-to), var(--border-from));
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
+      -webkit-mask-composite: xor; mask-composite: exclude;
       background-size: 200% 200%;
-      animation: none;
     }
-
-    @keyframes borderAnim {
-      0% {
-        background-position: 0% 0%;
-      }
-
-      100% {
-        background-position: 200% 200%;
-      }
-    }
-
-    .pass-card:hover {
-      transform: translateY(-10px) scale(1.03);
-    }
+    .pass-card:hover { transform: translateY(-8px) scale(1.02); }
 
     /* VVIP */
     .vvip {
       background: linear-gradient(145deg, #1a0f00, #2d1a00, #1a0f00);
-      box-shadow: 0 10px 40px rgba(201, 162, 39, 0.3);
-      --border-from: #c9a227;
-      --border-to: #fff8e1;
+      box-shadow: 0 10px 40px rgba(201,162,39,0.3);
+      --border-from: #c9a227; --border-to: #fff8e1;
     }
-
-    .vvip:hover {
-      box-shadow: 0 8px 20px rgba(201, 162, 39, 0.4);
-    }
+    .vvip:hover { box-shadow: 0 18px 50px rgba(201,162,39,0.45); }
 
     /* VIP */
     .vip {
       background: linear-gradient(145deg, #111, #222, #111);
-      box-shadow: 0 10px 40px rgba(180, 180, 180, 0.2);
-      --border-from: #aaa;
-      --border-to: #fff;
+      box-shadow: 0 10px 40px rgba(180,180,180,0.2);
+      --border-from: #aaa; --border-to: #fff;
     }
-
-    .vip:hover {
-      box-shadow: 0 20px 60px rgba(200, 200, 200, 0.4);
-    }
+    .vip:hover { box-shadow: 0 18px 50px rgba(200,200,200,0.35); }
 
     /* NON-VIP */
     .nonvip {
       background: linear-gradient(145deg, #120800, #1e1000, #120800);
-      box-shadow: 0 10px 40px rgba(139, 90, 43, 0.3);
-      --border-from: #8b5a2b;
-      --border-to: #d4956a;
+      box-shadow: 0 10px 40px rgba(139,90,43,0.3);
+      --border-from: #8b5a2b; --border-to: #d4956a;
     }
-
-    .nonvip:hover {
-      box-shadow: 0 20px 60px rgba(139, 90, 43, 0.5);
-    }
+    .nonvip:hover { box-shadow: 0 18px 50px rgba(139,90,43,0.5); }
 
     .pass-badge {
-      display: inline-block;
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 0.65rem;
-      letter-spacing: 4px;
-      padding: 4px 14px;
-      border-radius: 30px;
-      margin-bottom: 16px;
+      display: inline-block; font-family: 'Cinzel Decorative', serif;
+      font-size: 0.6rem; letter-spacing: 4px;
+      padding: 4px 14px; border-radius: 30px; margin-bottom: 14px;
     }
+    .vvip   .pass-badge { background: linear-gradient(90deg,#c9a227,#fff8c0,#c9a227); color:#3a1a00; }
+    .vip    .pass-badge { background: linear-gradient(90deg,#888,#fff,#888);           color:#111; }
+    .nonvip .pass-badge { background: linear-gradient(90deg,#8b5a2b,#d4956a,#8b5a2b); color:#fff8e1; }
 
-    .vvip .pass-badge {
-      background: linear-gradient(90deg, #c9a227, #fff8c0, #c9a227);
-      color: #3a1a00;
-    }
-
-    .vip .pass-badge {
-      background: linear-gradient(90deg, #888, #fff, #888);
-      color: #111;
-    }
-
-    .nonvip .pass-badge {
-      background: linear-gradient(90deg, #8b5a2b, #d4956a, #8b5a2b);
-      color: #fff8e1;
-    }
-
-    .pass-icon {
-      font-size: 2.5rem;
-      margin-bottom: 12px;
-      display: block;
-    }
+    .pass-icon { font-size: clamp(2rem, 5vw, 2.6rem); margin-bottom: 10px; display: block; }
 
     .pass-title {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 8px;
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      font-weight: 700; margin-bottom: 8px;
     }
-
-    .vvip .pass-title {
-      color: #c9a227;
-    }
-
-    .vip .pass-title {
-      color: #ccc;
-    }
-
-    .nonvip .pass-title {
-      color: #d4956a;
-    }
+    .vvip   .pass-title { color: #c9a227; }
+    .vip    .pass-title { color: #ccc; }
+    .nonvip .pass-title { color: #d4956a; }
 
     .pass-desc {
-      font-size: 0.75rem;
-      line-height: 1.6;
-      opacity: 0.7;
-      color: var(--ash);
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      font-family: 'Cinzel', serif;
+      font-size: clamp(0.68rem, 1.8vw, 0.78rem);
+      line-height: 1.6; opacity: 0.7; color: var(--ash);
+      letter-spacing: 1px; margin-bottom: 16px;
     }
 
-    .pass-features {
-      list-style: none;
-      margin-bottom: 24px;
-    }
-
+    .pass-features { list-style: none; margin-bottom: 22px; }
     .pass-features li {
-      font-size: 0.72rem;
-      color: var(--ash);
-      padding: 4px 0;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Cinzel', serif;
+      font-size: clamp(0.67rem, 1.8vw, 0.75rem);
+      color: var(--ash); padding: 4px 0; letter-spacing: 1px;
+      display: flex; align-items: center; gap: 8px;
     }
-
-    .vvip .pass-features li::before {
-      content: '✦';
-      color: #c9a227;
-    }
-
-    .vip .pass-features li::before {
-      content: '◆';
-      color: #888;
-    }
-
-    .nonvip .pass-features li::before {
-      content: '◈';
-      color: #8b5a2b;
-    }
+    .vvip   .pass-features li::before { content: '✦'; color: #c9a227; }
+    .vip    .pass-features li::before { content: '◆'; color: #888; }
+    .nonvip .pass-features li::before { content: '◈'; color: #8b5a2b; }
 
     .select-btn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
+      width: 100%; padding: 12px; border: none; border-radius: 10px;
       font-family: 'Cinzel Decorative', serif;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+      font-size: clamp(0.65rem, 2vw, 0.78rem);
+      letter-spacing: 2px; cursor: pointer;
+      transition: all 0.3s ease; position: relative; overflow: hidden;
     }
-
     .select-btn::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.1);
+      content: ''; position: absolute;
+      top: 50%; left: -100%; width: 100%; height: 100%;
+      background: rgba(255,255,255,0.12);
       transform: translateY(-50%) skewX(-20deg);
       transition: left 0.4s ease;
     }
+    .select-btn:hover::after { left: 150%; }
+    .vvip   .select-btn { background: linear-gradient(90deg,#c9a227,#8b6914); color: #fff8e1; }
+    .vip    .select-btn { background: linear-gradient(90deg,#888,#444);       color: #fff; }
+    .nonvip .select-btn { background: linear-gradient(90deg,#8b5a2b,#5a3a1a); color: #fff8e1; }
 
-    .select-btn:hover::after {
-      left: 150%;
-    }
-
-    .vvip .select-btn {
-      background: linear-gradient(90deg, #c9a227, #8b6914);
-      color: #fff8e1;
-    }
-
-    .vip .select-btn {
-      background: linear-gradient(90deg, #888, #444);
-      color: #fff;
-    }
-
-    .nonvip .select-btn {
-      background: linear-gradient(90deg, #8b5a2b, #5a3a1a);
-      color: #fff8e1;
-    }
-
-    /* ===== MODAL / OVERLAY ===== */
+    /* ── Overlay ── */
     .overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.92);
-      z-index: 100;
-      overflow-y: auto;
-      backdrop-filter: blur(10px);
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92); z-index: 100;
+      overflow-y: auto; backdrop-filter: blur(12px);
+      -webkit-overflow-scrolling: touch;
     }
-
     .overlay.active {
-      display: flex;
-      align-items: flex-start;
+      display: flex; align-items: flex-start;
       justify-content: center;
-      padding: 30px 16px;
+      padding: clamp(12px, 4vw, 30px) clamp(10px, 3vw, 16px);
     }
 
+    /* ── Modal ── */
     .modal {
-      width: 100%;
-      max-width: 780px;
-      border-radius: 24px;
-      overflow: hidden;
+      width: 100%; max-width: 680px;
+      border-radius: 24px; overflow: hidden;
       position: relative;
       animation: modalIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      margin-bottom: 20px;
     }
-
+    /* Image top corners match modal */
+    .mahadev-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+    }
     @keyframes modalIn {
-      from {
-        transform: scale(0.7) translateY(40px);
-        opacity: 0;
-      }
-
-      to {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-      }
+      from { transform: scale(0.75) translateY(40px); opacity: 0; }
+      to   { transform: scale(1) translateY(0);       opacity: 1; }
     }
-
-    .modal-vvip {
-      background: linear-gradient(160deg, #1a0f00, #2d1900, #0a0505);
-      border: 1px solid rgba(201, 162, 39, 0.4);
-      box-shadow: 0 0 80px rgba(201, 162, 39, 0.3);
-    }
-
-    .modal-vip {
-      background: linear-gradient(160deg, #111, #1a1a1a, #0a0a0a);
-      border: 1px solid rgba(150, 150, 150, 0.3);
-      box-shadow: 0 0 80px rgba(180, 180, 180, 0.2);
-    }
-
-    .modal-nonvip {
-      background: linear-gradient(160deg, #120800, #1e0f00, #0a0505);
-      border: 1px solid rgba(139, 90, 43, 0.4);
-      box-shadow: 0 0 80px rgba(139, 90, 43, 0.3);
-    }
+    .modal-vvip  { background: linear-gradient(160deg,#1a0f00,#2d1900,#0a0505); border: 1px solid rgba(201,162,39,0.4); box-shadow: 0 0 80px rgba(201,162,39,0.3); }
+    .modal-vip   { background: linear-gradient(160deg,#111,#1a1a1a,#0a0a0a);    border: 1px solid rgba(150,150,150,0.3); box-shadow: 0 0 80px rgba(180,180,180,0.2); }
+    .modal-nonvip{ background: linear-gradient(160deg,#120800,#1e0f00,#0a0505); border: 1px solid rgba(139,90,43,0.4);  box-shadow: 0 0 80px rgba(139,90,43,0.3); }
 
     .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: clamp(14px, 3vw, 20px) clamp(16px, 4vw, 24px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-
-    .modal-title-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .modal-title-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
     .modal-badge {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 0.6rem;
-      letter-spacing: 3px;
-      padding: 4px 12px;
-      border-radius: 20px;
+      font-family: 'Cinzel Decorative', serif; font-size: 0.58rem;
+      letter-spacing: 3px; padding: 4px 12px; border-radius: 20px;
     }
+    .modal-vvip  .modal-badge { background: linear-gradient(90deg,#c9a227,#fff8c0,#c9a227); color:#3a1a00; }
+    .modal-vip   .modal-badge { background: linear-gradient(90deg,#888,#fff,#888);           color:#111; }
+    .modal-nonvip .modal-badge{ background: linear-gradient(90deg,#8b5a2b,#d4956a,#8b5a2b); color:#fff8e1; }
 
-    .modal-vvip .modal-badge {
-      background: linear-gradient(90deg, #c9a227, #fff8c0, #c9a227);
-      color: #3a1a00;
-    }
-
-    .modal-vip .modal-badge {
-      background: linear-gradient(90deg, #888, #fff, #888);
-      color: #111;
-    }
-
-    .modal-nonvip .modal-badge {
-      background: linear-gradient(90deg, #8b5a2b, #d4956a, #8b5a2b);
-      color: #fff8e1;
-    }
-
-    .modal-subtitle {
-      font-size: 0.7rem;
-      color: var(--ash);
-      opacity: 0.6;
-      letter-spacing: 2px;
-    }
+    .modal-subtitle { font-size: 0.68rem; color: var(--ash); opacity: 0.6; letter-spacing: 2px; }
 
     .close-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
     }
+    .close-btn:hover { background: rgba(255,0,0,0.3); transform: rotate(90deg); }
 
-    .close-btn:hover {
-      background: rgba(255, 0, 0, 0.3);
-      transform: rotate(90deg);
-    }
-
-    /* Mahadev image section */
+    /* Mahadev image — full width */
     .mahadev-section {
-      position: relative;
-      text-align: center;
-      padding: 24px;
-      overflow: hidden;
+      position: relative; text-align: center;
+      padding: 0; overflow: hidden;
+      margin: 0;
     }
-
     .mahadev-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      filter: blur(25px);
-      opacity: 0.3;
-      pointer-events: none;
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 100%; height: 100%;
+      filter: blur(40px); opacity: 0.2; pointer-events: none; z-index: 0;
     }
-
-    .modal-vvip .mahadev-glow {
-      background: radial-gradient(#c9a227, transparent);
-    }
-
-    .modal-vip .mahadev-glow {
-      background: radial-gradient(#aaa, transparent);
-    }
-
-    .modal-nonvip .mahadev-glow {
-      background: radial-gradient(#d4956a, transparent);
-    }
+    .modal-vvip  .mahadev-glow { background: radial-gradient(ellipse at center, #c9a227, transparent 70%); }
+    .modal-vip   .mahadev-glow { background: radial-gradient(ellipse at center, #aaa, transparent 70%); }
+    .modal-nonvip .mahadev-glow{ background: radial-gradient(ellipse at center, #d4956a, transparent 70%); }
 
     .mahadev-img-wrap {
-      position: relative;
-      display: inline-block;
+      position: relative; display: block;
+      width: 100%; z-index: 1; line-height: 0;
     }
-
-    .mahadev-img-wrap::before {
+    .mahadev-img-wrap::before { content: none; }
+    .mahadev-img-wrap::after {
       content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, var(--ring-a), var(--ring-b), var(--ring-a));
-      background-size: 200% 200%;
-      animation: ringAnim 3s linear infinite;
-      z-index: -1;
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--ring-a), transparent);
+      z-index: 2;
     }
-
-    @keyframes ringAnim {
-
-      0%,
-      100% {
-        background-position: 0% 0%;
-      }
-
-      50% {
-        background-position: 100% 100%;
-      }
-    }
-
-    .modal-vvip .mahadev-img-wrap {
-      --ring-a: #c9a227;
-      --ring-b: #fff8c0;
-    }
-
-    .modal-vip .mahadev-img-wrap {
-      --ring-a: #888;
-      --ring-b: #fff;
-    }
-
-    .modal-nonvip .mahadev-img-wrap {
-      --ring-a: #8b5a2b;
-      --ring-b: #d4956a;
-    }
+    .modal-vvip  .mahadev-img-wrap { --ring-a: #c9a227; }
+    .modal-vip   .mahadev-img-wrap { --ring-a: #aaa; }
+    .modal-nonvip .mahadev-img-wrap { --ring-a: #d4956a; }
 
     .mahadev-img {
-      width: 180px;
-      height: 180px;
+      width: 100%;
+      height: 240px;
       object-fit: cover;
-      object-position: top center;
-      border-radius: 14px;
+      object-position: center center;
       display: block;
     }
 
     .mahadev-label {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 1rem;
-      margin-top: 14px;
-      letter-spacing: 3px;
+      font-size: clamp(0.78rem, 2.5vw, 1rem);
+      padding: 14px 16px 10px;
+      letter-spacing: 3px; position: relative; z-index: 1;
     }
+    .modal-vvip  .mahadev-label { color: #c9a227; }
+    .modal-vip   .mahadev-label { color: #ccc; }
+    .modal-nonvip .mahadev-label{ color: #d4956a; }
 
-    .modal-vvip .mahadev-label {
-      color: #c9a227;
-    }
-
-    .modal-vip .mahadev-label {
-      color: #ccc;
-    }
-
-    .modal-nonvip .mahadev-label {
-      color: #d4956a;
-    }
-
-    /* Pass button with name label */
-    .pass-action-area {
-      padding: 0 24px 24px;
-      text-align: center;
-    }
-
+    /* Action button */
+    .pass-action-area { padding: 0 clamp(16px,4vw,24px) clamp(16px,4vw,24px); text-align: center; }
     .pass-action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 32px;
-      border: none;
-      border-radius: 12px;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: clamp(11px,2.5vw,14px) clamp(20px,5vw,32px);
+      border: none; border-radius: 12px;
       font-family: 'Cinzel Decorative', serif;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
+      font-size: clamp(0.65rem, 2vw, 0.8rem);
+      letter-spacing: 2px; cursor: pointer;
+      transition: all 0.3s; position: relative; overflow: hidden;
     }
+    .modal-vvip  .pass-action-btn { background: linear-gradient(90deg,#c9a227,#8b6914); color:#fff8e1; box-shadow: 0 6px 25px rgba(201,162,39,0.4); }
+    .modal-vip   .pass-action-btn { background: linear-gradient(90deg,#888,#444);       color:#fff;    box-shadow: 0 6px 25px rgba(150,150,150,0.3); }
+    .modal-nonvip .pass-action-btn{ background: linear-gradient(90deg,#8b5a2b,#5a3a1a); color:#fff8e1; box-shadow: 0 6px 25px rgba(139,90,43,0.4); }
+    .pass-action-btn:hover { transform: scale(1.05); }
 
-    .modal-vvip .pass-action-btn {
-      background: linear-gradient(90deg, #c9a227, #8b6914);
-      color: #fff8e1;
-      box-shadow: 0 6px 25px rgba(201, 162, 39, 0.4);
-    }
-
-    .modal-vip .pass-action-btn {
-      background: linear-gradient(90deg, #888, #444);
-      color: #fff;
-      box-shadow: 0 6px 25px rgba(150, 150, 150, 0.3);
-    }
-
-    .modal-nonvip .pass-action-btn {
-      background: linear-gradient(90deg, #8b5a2b, #5a3a1a);
-      color: #fff8e1;
-      box-shadow: 0 6px 25px rgba(139, 90, 43, 0.4);
-    }
-
-    .pass-action-btn:hover {
-      transform: scale(1.05);
-    }
-
-    /* ===== FORM SECTION ===== */
-    .form-section {
-      display: none;
-      padding: 0 24px 24px;
-      animation: fadeSlide 0.3s ease;
-    }
-
-    .form-section.visible {
-      display: block;
-    }
-
+    /* Form section */
+    .form-section { display: none; padding: 0 clamp(16px,4vw,28px) clamp(20px,4vw,28px); animation: fadeSlide 0.3s ease; }
+    .form-section.visible { display: block; }
     @keyframes fadeSlide {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .form-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      margin: 0 0 20px;
-    }
+    .form-divider { height: 1px; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent); margin: 0 0 18px; }
 
     .form-heading {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 0.8rem;
-      letter-spacing: 3px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+      letter-spacing: 3px; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
     }
+    .modal-vvip  .form-heading { color: #c9a227; }
+    .modal-vip   .form-heading { color: #aaa; }
+    .modal-nonvip .form-heading{ color: #d4956a; }
 
-    .modal-vvip .form-heading {
-      color: #c9a227;
-    }
-
-    .modal-vip .form-heading {
-      color: #aaa;
-    }
-
-    .modal-nonvip .form-heading {
-      color: #d4956a;
-    }
-
-    .persons-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
+    .persons-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 18px; }
 
     .person-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
+      display: flex; gap: 10px; align-items: center;
       animation: personIn 0.3s ease;
     }
-
     @keyframes personIn {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
     }
 
     .person-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-      flex-shrink: 0;
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; flex-shrink: 0;
     }
-
-    .modal-vvip .person-num {
-      background: rgba(201, 162, 39, 0.2);
-      color: #c9a227;
-      border: 1px solid rgba(201, 162, 39, 0.4);
-    }
-
-    .modal-vip .person-num {
-      background: rgba(150, 150, 150, 0.2);
-      color: #ccc;
-      border: 1px solid rgba(150, 150, 150, 0.4);
-    }
-
-    .modal-nonvip .person-num {
-      background: rgba(139, 90, 43, 0.2);
-      color: #d4956a;
-      border: 1px solid rgba(139, 90, 43, 0.4);
-    }
+    .modal-vvip  .person-num { background: rgba(201,162,39,0.2); color:#c9a227; border:1px solid rgba(201,162,39,0.5); }
+    .modal-vip   .person-num { background: rgba(150,150,150,0.2); color:#ccc;    border:1px solid rgba(150,150,150,0.5); }
+    .modal-nonvip .person-num { background: rgba(139,90,43,0.2);  color:#d4956a; border:1px solid rgba(139,90,43,0.5); }
 
     .person-input {
-      flex: 1;
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
+      flex: 1; min-width: 0;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.07);
       color: var(--cream);
       font-family: 'Cinzel', serif;
-      font-size: 0.78rem;
-      letter-spacing: 1px;
-      outline: none;
-      transition: all 0.2s;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      letter-spacing: 1.5px;
+      outline: none; transition: all 0.2s;
+      width: 100%;
     }
-
-    .person-input::placeholder {
-      opacity: 0.4;
-    }
-
-    .modal-vvip .person-input:focus {
-      border-color: rgba(201, 162, 39, 0.6);
-      box-shadow: 0 0 10px rgba(201, 162, 39, 0.15);
-    }
-
-    .modal-vip .person-input:focus {
-      border-color: rgba(180, 180, 180, 0.6);
-      box-shadow: 0 0 10px rgba(180, 180, 180, 0.15);
-    }
-
-    .modal-nonvip .person-input:focus {
-      border-color: rgba(139, 90, 43, 0.6);
-      box-shadow: 0 0 10px rgba(139, 90, 43, 0.15);
-    }
+    .person-input::placeholder { opacity: 0.45; font-size: 0.85rem; }
+    .modal-vvip  .person-input:focus { border-color: rgba(201,162,39,0.7); box-shadow: 0 0 14px rgba(201,162,39,0.2); background: rgba(201,162,39,0.06); }
+    .modal-vip   .person-input:focus { border-color: rgba(180,180,180,0.7); box-shadow: 0 0 14px rgba(180,180,180,0.2); background: rgba(180,180,180,0.06); }
+    .modal-nonvip .person-input:focus{ border-color: rgba(139,90,43,0.7);  box-shadow: 0 0 14px rgba(139,90,43,0.2); background: rgba(139,90,43,0.06); }
 
     .remove-person-btn {
-      background: rgba(255, 60, 60, 0.15);
-      border: 1px solid rgba(255, 60, 60, 0.3);
-      color: #ff6b6b;
-      width: 30px;
-      height: 30px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      flex-shrink: 0;
+      background: rgba(255,60,60,0.15); border: 1px solid rgba(255,60,60,0.3);
+      color: #ff6b6b; width: 30px; height: 30px; border-radius: 6px;
+      cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; flex-shrink: 0;
     }
-
-    .remove-person-btn:hover {
-      background: rgba(255, 60, 60, 0.3);
-      transform: scale(1.1);
-    }
+    .remove-person-btn:hover { background: rgba(255,60,60,0.3); transform: scale(1.1); }
 
     .add-person-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      border: 2px dashed;
-      background: transparent;
-      font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+      padding: clamp(11px,2.5vw,14px) clamp(16px,3vw,22px);
+      border-radius: 10px; border: 2px dashed;
+      background: transparent; font-family: 'Cinzel', serif;
+      font-size: clamp(0.78rem, 2.2vw, 0.88rem);
+      letter-spacing: 2px; cursor: pointer; transition: all 0.2s; margin-bottom: 18px;
     }
-
-    .modal-vvip .add-person-btn {
-      border-color: rgba(201, 162, 39, 0.4);
-      color: #c9a227;
-    }
-
-    .modal-vvip .add-person-btn:hover {
-      background: rgba(201, 162, 39, 0.1);
-      border-color: rgba(201, 162, 39, 0.8);
-    }
-
-    .modal-vip .add-person-btn {
-      border-color: rgba(180, 180, 180, 0.4);
-      color: #aaa;
-    }
-
-    .modal-vip .add-person-btn:hover {
-      background: rgba(180, 180, 180, 0.1);
-      border-color: rgba(180, 180, 180, 0.8);
-    }
-
-    .modal-nonvip .add-person-btn {
-      border-color: rgba(139, 90, 43, 0.4);
-      color: #d4956a;
-    }
-
-    .modal-nonvip .add-person-btn:hover {
-      background: rgba(139, 90, 43, 0.1);
-      border-color: rgba(139, 90, 43, 0.8);
-    }
+    .modal-vvip  .add-person-btn { border-color: rgba(201,162,39,0.4); color:#c9a227; }
+    .modal-vvip  .add-person-btn:hover { background: rgba(201,162,39,0.1); border-color: rgba(201,162,39,0.8); }
+    .modal-vip   .add-person-btn { border-color: rgba(180,180,180,0.4); color:#aaa; }
+    .modal-vip   .add-person-btn:hover { background: rgba(180,180,180,0.1); border-color: rgba(180,180,180,0.8); }
+    .modal-nonvip .add-person-btn { border-color: rgba(139,90,43,0.4); color:#d4956a; }
+    .modal-nonvip .add-person-btn:hover { background: rgba(139,90,43,0.1); border-color: rgba(139,90,43,0.8); }
 
     .generate-btn {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 12px;
+      width: 100%; padding: clamp(14px,3vw,18px); border: none; border-radius: 12px;
       font-family: 'Cinzel Decorative', serif;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      cursor: pointer;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
+      font-size: clamp(0.82rem, 2.4vw, 1rem);
+      letter-spacing: 3px; cursor: pointer; transition: all 0.3s;
+      position: relative; overflow: hidden;
     }
+    .modal-vvip  .generate-btn { background: linear-gradient(90deg,#c9a227,#8b6914,#c9a227); background-size:200%; color:#fff8e1; }
+    .modal-vip   .generate-btn { background: linear-gradient(90deg,#888,#444,#888);           background-size:200%; color:#fff; }
+    .modal-nonvip .generate-btn { background: linear-gradient(90deg,#8b5a2b,#5a3a1a,#8b5a2b); background-size:200%; color:#fff8e1; }
+    .generate-btn:hover { background-position: right; transform: scale(1.02); }
 
-    .modal-vvip .generate-btn {
-      background: linear-gradient(90deg, #c9a227, #8b6914, #c9a227);
-      background-size: 200%;
-      color: #fff8e1;
-    }
+    /* QR Section */
+    .qr-section { display: none; padding: 0 clamp(14px,4vw,24px) clamp(18px,4vw,30px); animation: fadeSlide 0.3s ease; }
+    .qr-section.visible { display: block; }
 
-    .modal-vip .generate-btn {
-      background: linear-gradient(90deg, #888, #444, #888);
-      background-size: 200%;
-      color: #fff;
-    }
-
-    .modal-nonvip .generate-btn {
-      background: linear-gradient(90deg, #8b5a2b, #5a3a1a, #8b5a2b);
-      background-size: 200%;
-      color: #fff8e1;
-    }
-
-    .generate-btn:hover {
-      background-position: right;
-      transform: scale(1.02);
-    }
-
-    /* ===== QR SECTION ===== */
-    .qr-section {
-      display: none;
-      padding: 0 24px 30px;
-      animation: fadeSlide 0.3s ease;
-    }
-
-    .qr-section.visible {
-      display: block;
-    }
-
-    .qr-card {
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-    }
-
-    .modal-vvip .qr-card {
-      background: rgba(201, 162, 39, 0.05);
-      border: 1px solid rgba(201, 162, 39, 0.2);
-    }
-
-    .modal-vip .qr-card {
-      background: rgba(180, 180, 180, 0.05);
-      border: 1px solid rgba(180, 180, 180, 0.2);
-    }
-
-    .modal-nonvip .qr-card {
-      background: rgba(139, 90, 43, 0.05);
-      border: 1px solid rgba(139, 90, 43, 0.2);
-    }
+    .qr-card { border-radius: 16px; padding: clamp(16px,4vw,24px); text-align: center; }
+    .modal-vvip  .qr-card { background: rgba(201,162,39,0.05); border:1px solid rgba(201,162,39,0.2); }
+    .modal-vip   .qr-card { background: rgba(180,180,180,0.05); border:1px solid rgba(180,180,180,0.2); }
+    .modal-nonvip .qr-card{ background: rgba(139,90,43,0.05);   border:1px solid rgba(139,90,43,0.2); }
 
     .qr-heading {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      margin-bottom: 18px;
+      font-size: clamp(0.65rem, 2vw, 0.78rem);
+      letter-spacing: 3px; margin-bottom: 16px;
     }
-
-    .modal-vvip .qr-heading {
-      color: #c9a227;
-    }
-
-    .modal-vip .qr-heading {
-      color: #aaa;
-    }
-
-    .modal-nonvip .qr-heading {
-      color: #d4956a;
-    }
+    .modal-vvip  .qr-heading { color: #c9a227; }
+    .modal-vip   .qr-heading { color: #aaa; }
+    .modal-nonvip .qr-heading{ color: #d4956a; }
 
     #qrcode-display {
-      display: inline-block;
-      padding: 14px;
-      background: #fff;
-      border-radius: 12px;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      display: inline-block; padding: 14px; background: #fff;
+      border-radius: 12px; margin-bottom: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      max-width: 100%;
     }
+    #qrcode-display canvas,
+    #qrcode-display img { max-width: 100%; height: auto !important; }
 
     .qr-persons-list {
-      text-align: left;
-      margin-bottom: 16px;
-      padding: 14px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.04);
+      text-align: left; margin-bottom: 14px;
+      padding: 14px; border-radius: 10px;
+      background: rgba(255,255,255,0.04);
     }
-
     .qr-persons-list h4 {
-      font-size: 0.65rem;
-      letter-spacing: 3px;
-      margin-bottom: 10px;
-      opacity: 0.6;
-      font-family: 'Cinzel', serif;
+      font-size: 0.62rem; letter-spacing: 3px; margin-bottom: 10px;
+      opacity: 0.6; font-family: 'Cinzel', serif;
     }
-
-    .modal-vvip .qr-persons-list h4 {
-      color: #c9a227;
-    }
-
-    .modal-vip .qr-persons-list h4 {
-      color: #aaa;
-    }
-
-    .modal-nonvip .qr-persons-list h4 {
-      color: #d4956a;
-    }
+    .modal-vvip  .qr-persons-list h4 { color: #c9a227; }
+    .modal-vip   .qr-persons-list h4 { color: #aaa; }
+    .modal-nonvip .qr-persons-list h4{ color: #d4956a; }
 
     .qr-person-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex; align-items: center; gap: 10px;
+      padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
       font-family: 'Cinzel', serif;
     }
-
-    .qr-person-item:last-child {
-      border-bottom: none;
-    }
-
+    .qr-person-item:last-child { border-bottom: none; }
     .qr-person-item .q-num {
-      font-size: 0.65rem;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      font-size: 0.62rem; width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
+    .modal-vvip  .qr-person-item .q-num { background: rgba(201,162,39,0.2); color:#c9a227; }
+    .modal-vip   .qr-person-item .q-num { background: rgba(180,180,180,0.2); color:#ccc; }
+    .modal-nonvip .qr-person-item .q-num{ background: rgba(139,90,43,0.2);   color:#d4956a; }
+    .qr-person-item .q-name { color: var(--cream); font-size: clamp(0.72rem,2vw,0.82rem); flex:1; min-width:0; word-break:break-word; }
+    .qr-person-item .q-phone { color: var(--ash); font-size: clamp(0.62rem,1.8vw,0.72rem); opacity:0.7; margin-left:auto; white-space:nowrap; }
 
-    .modal-vvip .qr-person-item .q-num {
-      background: rgba(201, 162, 39, 0.2);
-      color: #c9a227;
-    }
-
-    .modal-vip .qr-person-item .q-num {
-      background: rgba(180, 180, 180, 0.2);
-      color: #ccc;
-    }
-
-    .modal-nonvip .qr-person-item .q-num {
-      background: rgba(139, 90, 43, 0.2);
-      color: #d4956a;
-    }
-
-    .qr-person-item .q-name {
-      color: var(--cream);
-      font-size: 0.8rem;
-    }
-
-    .qr-person-item .q-phone {
-      color: var(--ash);
-      font-size: 0.72rem;
-      opacity: 0.7;
-      margin-left: auto;
+    .qr-actions {
+      display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 16px;
     }
 
     .back-btn {
-      margin-top: 16px;
-      padding: 10px 24px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--ash);
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
+      padding: clamp(9px,2vw,11px) clamp(18px,4vw,24px); border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05); color: var(--ash);
+      font-family: 'Cinzel', serif; font-size: clamp(0.64rem,1.8vw,0.72rem);
+      letter-spacing: 2px; cursor: pointer; transition: all 0.2s;
     }
+    .back-btn:hover { background: rgba(255,255,255,0.12); }
 
-    .back-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    /* divider ornament */
-    .ornament {
-      text-align: center;
-      color: rgba(201, 162, 39, 0.4);
-      font-size: 1.2rem;
-      letter-spacing: 8px;
-      padding: 10px 0;
+    /* ── Responsive helpers ── */
+    @media (max-width: 480px) {
+      .person-row { flex-wrap: wrap; }
+      .person-input { min-width: calc(50% - 24px); }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Particles -->
   <div class="particles" id="particles"></div>
 
   <header>
@@ -1065,10 +507,9 @@
 
   <div class="ornament">✦ ✦ ✦</div>
 
-  <!-- 3 Pass Cards -->
+  <!-- Pass Cards -->
   <div class="pass-container">
 
-    <!-- VVIP -->
     <div class="pass-card vvip" onclick="openModal('vvip')">
       <div class="pass-badge">DIVINE ENTRY</div>
       <span class="pass-icon">🔱</span>
@@ -1077,13 +518,12 @@
       <ul class="pass-features">
         <li>First Row Darshan</li>
         <li>VIP Seating Arrangement</li>
-        <li>Special Prasad & Blessings</li>
+        <li>Special Prasad &amp; Blessings</li>
         <li>Priority Darshan Queue</li>
       </ul>
       <button class="select-btn">SELECT VVIP ✦</button>
     </div>
 
-    <!-- VIP -->
     <div class="pass-card vip" onclick="openModal('vip')">
       <div class="pass-badge">PREMIUM ENTRY</div>
       <span class="pass-icon">⭐</span>
@@ -1098,7 +538,6 @@
       <button class="select-btn">SELECT VIP ◆</button>
     </div>
 
-    <!-- NON-VIP -->
     <div class="pass-card nonvip" onclick="openModal('nonvip')">
       <div class="pass-badge">GENERAL ENTRY</div>
       <span class="pass-icon">🙏</span>
@@ -1115,7 +554,7 @@
 
   </div>
 
-  <!-- ===== MODAL ===== -->
+  <!-- Modal Overlay -->
   <div class="overlay" id="overlay">
     <div class="modal" id="modal">
 
@@ -1131,54 +570,41 @@
       <div class="mahadev-section">
         <div class="mahadev-glow"></div>
         <div class="mahadev-img-wrap">
-          <img src="/uploads/images.jpg" alt="Mahadev" class="mahadev-img"
-            onerror="this.src='https://via.placeholder.com/220x220/1a0f00/c9a227?text=🔱'">
+          <img src="/uploads/images.jpg" alt="Mahadev" class="mahadev-img" id="modal-img"
+            onerror="this.src='https://placehold.co/600x300/1a0f00/c9a227?text=🔱'">
         </div>
         <div class="mahadev-label" id="modal-pass-name">🔱 VVIP PASS 🔱</div>
       </div>
 
-      <!-- Pass Action Button -->
+      <!-- Action Button -->
       <div class="pass-action-area" id="pass-action-area">
-        <button class="pass-action-btn" id="pass-action-btn" onclick="showForm()">
+        <button class="pass-action-btn" onclick="showForm()">
           <span>📋</span>
           <span id="btn-label-text">PASS REGISTER KARO</span>
         </button>
       </div>
 
-      <!-- Form Section -->
+      <!-- Form -->
       <div class="form-section" id="form-section">
         <div class="form-divider"></div>
-        <div class="form-heading">
-          <span>👤</span>
-          <span>VYAKTI KI JANKARI BHARO</span>
-        </div>
-
-        <div class="persons-list" id="persons-list">
-          <!-- rows added dynamically -->
-        </div>
-
-        <button class="add-person-btn" onclick="addPerson()">
-          ＋ &nbsp; AUR VYAKTI JODO
-        </button>
-
-        <button class="generate-btn" onclick="generateQR()">
-          🔱 &nbsp; QR CODE BANAO &nbsp; 🔱
-        </button>
+        <div class="form-heading"><span>👤</span><span>VYAKTI KI JANKARI BHARO</span></div>
+        <div class="persons-list" id="persons-list"></div>
+        <button class="add-person-btn" onclick="addPerson()">＋ &nbsp; AUR VYAKTI JODO</button>
+        <button class="generate-btn" onclick="generateQR()">🔱 &nbsp; QR CODE BANAO &nbsp; 🔱</button>
       </div>
 
-      <!-- QR Section -->
+      <!-- QR -->
       <div class="qr-section" id="qr-section">
         <div class="form-divider"></div>
         <div class="qr-card">
           <div class="qr-heading">🔱 AAPKA PASS QR CODE 🔱</div>
           <div id="qrcode-display"></div>
-
           <div class="qr-persons-list" id="qr-persons-display">
             <h4>REGISTERED PERSONS</h4>
-            <!-- persons listed here -->
           </div>
-
-          <button class="back-btn" onclick="goBack()">← WAPAS JAO</button>
+          <div class="qr-actions">
+            <button class="back-btn" onclick="goBack()">← WAPAS JAO</button>
+          </div>
         </div>
       </div>
 
@@ -1187,46 +613,21 @@
 
   <script>
     // Particles
-    const container = document.getElementById('particles');
-    for (let i = 0; i < 10; i++) {
+    const pCont = document.getElementById('particles');
+    for (let i = 0; i < 12; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
-      p.style.cssText = `
-        left: ${Math.random() * 100}%;
-        width: ${Math.random() * 4 + 2}px;
-        height: ${Math.random() * 4 + 2}px;
-      animation-duration: ${Math.random() * 25 + 15}s;
-        animation-delay: ${Math.random() * 10}s;
-        opacity: ${Math.random() * 0.5};
-      `;
-      container.appendChild(p);
+      p.style.cssText = `left:${Math.random()*100}%;width:${Math.random()*3+2}px;height:${Math.random()*3+2}px;animation-duration:${Math.random()*25+15}s;animation-delay:${Math.random()*12}s;`;
+      pCont.appendChild(p);
     }
 
     let currentPass = 'vvip';
-    let personCount = 1;
+    let personCount = 0;
 
     const passConfig = {
-      vvip: {
-        badge: 'VVIP',
-        subtitle: 'DIVINE PASS',
-        name: '🔱 VVIP PASS 🔱',
-        btnLabel: 'VVIP PASS REGISTER KARO',
-        modalClass: 'modal-vvip',
-      },
-      vip: {
-        badge: 'VIP',
-        subtitle: 'PREMIUM PASS',
-        name: '⭐ VIP PASS ⭐',
-        btnLabel: 'VIP PASS REGISTER KARO',
-        modalClass: 'modal-vip',
-      },
-      nonvip: {
-        badge: 'GENERAL',
-        subtitle: 'GENERAL PASS',
-        name: '🙏 GENERAL PASS 🙏',
-        btnLabel: 'GENERAL PASS REGISTER KARO',
-        modalClass: 'modal-nonvip',
-      }
+      vvip:   { badge:'VVIP',    subtitle:'DIVINE PASS',  name:'🔱 VVIP PASS 🔱',   btnLabel:'VVIP PASS REGISTER KARO',    cls:'modal-vvip',   limit:3,  img:'/uploads/images.jpg' },
+      vip:    { badge:'VIP',     subtitle:'PREMIUM PASS', name:'⭐ VIP PASS ⭐',    btnLabel:'VIP PASS REGISTER KARO',     cls:'modal-vip',    limit:5,  img:'/uploads/sddefault.jpg' },
+      nonvip: { badge:'GENERAL', subtitle:'GENERAL PASS', name:'🙏 GENERAL PASS 🙏', btnLabel:'GENERAL PASS REGISTER KARO', cls:'modal-nonvip', limit:50, img:'/uploads/maxresdefault.jpg' },
     };
 
     function openModal(type) {
@@ -1234,22 +635,16 @@
       personCount = 0;
       const cfg = passConfig[type];
       const modal = document.getElementById('modal');
-
-      // Reset classes
-      modal.className = 'modal ' + cfg.modalClass;
-
-      // Set texts
+      modal.className = 'modal ' + cfg.cls;
       document.getElementById('modal-badge-text').textContent = cfg.badge;
       document.getElementById('modal-subtitle-text').textContent = cfg.subtitle;
       document.getElementById('modal-pass-name').textContent = cfg.name;
       document.getElementById('btn-label-text').textContent = cfg.btnLabel;
-
-      // Reset state
+      document.getElementById('modal-img').src = cfg.img;
       document.getElementById('form-section').classList.remove('visible');
       document.getElementById('qr-section').classList.remove('visible');
       document.getElementById('pass-action-area').style.display = 'block';
       document.getElementById('persons-list').innerHTML = '';
-
       document.getElementById('overlay').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -1268,32 +663,23 @@
     }
 
     function addPerson() {
-
-      const limits = {
-        vvip: 3,
-        vip: 5,
-        nonvip: 50
-      };
-
-      if (personCount >= limits[currentPass]) {
-        alert("Is pass me sirf " + limits[currentPass] + " log allowed hain 🙏");
+      const limit = passConfig[currentPass].limit;
+      if (personCount >= limit) {
+        alert('Is pass me sirf ' + limit + ' log allowed hain 🙏');
         return;
       }
-
       personCount++;
-
+      const id = personCount;
       const list = document.getElementById('persons-list');
-
       const div = document.createElement('div');
       div.className = 'person-row';
-      div.id = 'person-' + personCount;
-
+      div.id = 'person-' + id;
       div.innerHTML = `
-    <div class="person-num">${personCount}</div>
-    <input class="person-input" id="name-${personCount}" type="text" placeholder="Naam">
-    <input class="person-input" id="phone-${personCount}" type="tel" placeholder="Number">
-  `;
-
+        <div class="person-num">${id}</div>
+        <input class="person-input" id="name-${id}" type="text" placeholder="Naam">
+        <input class="person-input" id="phone-${id}" type="tel" placeholder="Number" inputmode="numeric">
+        ${id > 1 ? `<button class="remove-person-btn" onclick="removePerson(${id})">✕</button>` : ''}
+      `;
       list.appendChild(div);
     }
 
@@ -1303,45 +689,40 @@
     }
 
     function generateQR() {
-
       const rows = document.querySelectorAll('.person-row');
-
       const persons = [];
-
       rows.forEach(row => {
         const id = row.id.split('-')[1];
-        const name = document.getElementById('name-' + id).value;
-        const phone = document.getElementById('phone-' + id).value;
-
-        if (name && phone) {
-          persons.push({ name, phone });
-        }
+        const name  = (document.getElementById('name-'  + id) || {}).value || '';
+        const phone = (document.getElementById('phone-' + id) || {}).value || '';
+        if (name.trim() && phone.trim()) persons.push({ name: name.trim(), phone: phone.trim() });
       });
+      if (persons.length === 0) { alert('Naam aur number daalo 🙏'); return; }
 
-      if (persons.length == 0) {
-        alert("Naam aur number daalo");
-        return;
-      }
+      const payload = encodeURIComponent(JSON.stringify({ pass: currentPass, persons }));
+      const link = 'pass.html?data=' + payload;
 
-      const data = encodeURIComponent(JSON.stringify({
-        pass: currentPass,
-        persons: persons
-      }));
+      const qrDiv = document.getElementById('qrcode-display');
+      qrDiv.innerHTML = '';
+      const size = Math.min(180, window.innerWidth - 80);
+      new QRCode(qrDiv, { text: link, width: size, height: size });
 
-      const link = "pass.html?data=" + data;
-
-      const qrDiv = document.getElementById("qrcode-display");
-      qrDiv.innerHTML = "";
-
-      new QRCode(qrDiv, {
-        text: link,
-        width: 180,
-        height: 180
+      // Build persons list
+      const display = document.getElementById('qr-persons-display');
+      display.innerHTML = '<h4>REGISTERED PERSONS</h4>';
+      persons.forEach((p, i) => {
+        const item = document.createElement('div');
+        item.className = 'qr-person-item';
+        item.innerHTML = `
+          <span class="q-num">${i+1}</span>
+          <span class="q-name">${escHtml(p.name)}</span>
+          <span class="q-phone">${escHtml(p.phone)}</span>
+        `;
+        display.appendChild(item);
       });
 
       document.getElementById('form-section').classList.remove('visible');
       document.getElementById('qr-section').classList.add('visible');
-
     }
 
     function goBack() {
@@ -1349,11 +730,16 @@
       document.getElementById('form-section').classList.add('visible');
     }
 
-    // Close on overlay click
-    document.getElementById('overlay').addEventListener('click', function (e) {
+    function escHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    document.getElementById('overlay').addEventListener('click', function(e) {
       if (e.target === this) closeModal();
     });
+
+    // Close on Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   </script>
 </body>
-
 </html>
